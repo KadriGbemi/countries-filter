@@ -1,3 +1,5 @@
-const Input = () => <>input</>
+import { Input } from "antd"
 
-export default Input
+const TextInputField = () => <Input placeholder="Enter country code" />
+
+export default TextInputField
