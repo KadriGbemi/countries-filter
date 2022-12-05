@@ -1,31 +1,29 @@
 import { Table } from "antd"
-
-const dataSource = [
-  {
-    key: "1",
-    name: "Mike",
-    code: 32,
-  },
-  {
-    key: "2",
-    name: "John",
-    code: 42,
-  },
-]
+import { useQuery } from "@apollo/client"
+import GET_COUNTRIES from "../api"
 
 const columns = [
   {
     title: "Name",
     dataIndex: "name",
-    key: "name",
   },
   {
     title: "Code",
     dataIndex: "code",
-    key: "code",
   },
 ]
 
-const CountriesList = () => <Table dataSource={dataSource} columns={columns} />
+const CountriesList = () => {
+  const { loading, error, data } = useQuery(GET_COUNTRIES)
+
+  return (
+    <Table
+      rowKey={(record) => record?.code}
+      dataSource={data?.countries}
+      columns={columns}
+      loading={loading}
+    />
+  )
+}
 
 export default CountriesList
