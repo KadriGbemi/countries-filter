@@ -1,13 +1,21 @@
 import { gql } from '@apollo/client';
 
-const GET_COUNTRIES = gql`
+export const GET_ALL_COUNTRIES = gql`
   query GetCountries {
-    countries{
+    countries {
       capital,
-    name,
-    code
-  }
+      name,
+      code
+    }
   }
 `;
 
-export default GET_COUNTRIES;
+export const GET_COUNTRIES_BY_INPUT = gql`
+  query GetCountries($code: String!) {
+    countries(filter: { code: { eq: $code }}){
+      capital,
+      name,
+      code
+    }
+  }
+`;

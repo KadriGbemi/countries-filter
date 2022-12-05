@@ -1,6 +1,8 @@
-import { Table } from "antd"
 import { useQuery } from "@apollo/client"
-import GET_COUNTRIES from "../api"
+
+import { Table } from "antd"
+
+import { GET_ALL_COUNTRIES } from "../api"
 
 const columns = [
   {
@@ -13,15 +15,18 @@ const columns = [
   },
 ]
 
-const CountriesList = () => {
-  const { loading, error, data } = useQuery(GET_COUNTRIES)
+const CountriesList = ({ inputValue, loading, countries }: any) => {
+  const { data, loading: isLoading } = useQuery(GET_ALL_COUNTRIES, {
+    notifyOnNetworkStatusChange: true,
+    skip: inputValue,
+  })
 
   return (
     <Table
       rowKey={(record) => record?.code}
-      dataSource={data?.countries}
+      dataSource={inputValue ? countries : data?.countries}
       columns={columns}
-      loading={loading}
+      loading={loading || isLoading}
     />
   )
 }

@@ -1,16 +1,38 @@
 import { Row, Col } from "antd"
+import { useQuery } from "@apollo/client"
+import debounce from "lodash/debounce"
+
+import { GET_COUNTRIES_BY_INPUT } from "./api"
+
 import TextInputField from "./components/input"
 import CountriesList from "./components/countries"
+import { useState } from "react"
 
 function App() {
+  const [inputValue, setInputValue] = useState()
+
+  const { data, refetch, ...rest } = useQuery(GET_COUNTRIES_BY_INPUT, {
+    notifyOnNetworkStatusChange: true,
+  })
+
+  const handleInputChange = debounce((event) => {
+    setInputValue(event?.target?.value)
+
+    refetch({ code: event?.target?.value })
+  }, 1000)
+
   return (
     <div className="container">
       <Row gutter={[18, 18]}>
         <Col span={24}>
-          <TextInputField />
+          <TextInputField handleInputChange={handleInputChange} />
         </Col>
         <Col span={24}>
-          <CountriesList />
+          <CountriesList
+            {...rest}
+            countries={data?.countries}
+            inputValue={inputValue}
+          />
         </Col>
       </Row>
     </div>
