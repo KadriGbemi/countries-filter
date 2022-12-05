@@ -16,9 +16,12 @@ function App() {
   })
 
   const handleInputChange = debounce((event) => {
-    setInputValue(event?.target?.value)
+    const value = event?.target?.value
+    setInputValue(value)
 
-    refetch({ code: event?.target?.value })
+    if (value) {
+      refetch({ code: value })
+    }
   }, 1000)
 
   return (
