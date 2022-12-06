@@ -1,6 +1,7 @@
 import { GET_ALL_COUNTRIES } from "../api"
+import { CountryProps } from "../types/countries"
 
-export const allCountries: any = [
+export const allCountries = [
     {
         request: {
             query: GET_ALL_COUNTRIES,
@@ -24,7 +25,7 @@ export const allCountries: any = [
     },
 ]
 
-export const filteredCountries: any = [
+export const filteredCountries: CountryProps[] = [
     {
         capital: "Kabul",
         name: "Afghanistan",

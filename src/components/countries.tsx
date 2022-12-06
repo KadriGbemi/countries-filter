@@ -3,6 +3,7 @@ import { useQuery } from "@apollo/client"
 import { Table } from "antd"
 
 import { GET_ALL_COUNTRIES } from "../api"
+import { CountriesListProps } from "../types/countries"
 
 const columns = [
   {
@@ -15,10 +16,14 @@ const columns = [
   },
 ]
 
-const CountriesList = ({ inputValue, loading, countries }: any) => {
+const CountriesList = ({
+  inputValue,
+  loading,
+  countries,
+}: CountriesListProps) => {
   const { data, loading: isLoading } = useQuery(GET_ALL_COUNTRIES, {
     notifyOnNetworkStatusChange: true,
-    skip: inputValue,
+    skip: Boolean(inputValue),
   })
 
   return (
