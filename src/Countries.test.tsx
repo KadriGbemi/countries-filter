@@ -2,8 +2,8 @@ import "@testing-library/jest-dom"
 import { render, screen } from "@testing-library/react"
 import { MockedProvider } from "@apollo/client/testing"
 
-import CountriesList from "../components/countries"
-import { allCountries, filteredCountries } from "./countries"
+import CountriesList from "./components/countries"
+import { allCountries, filteredCountries } from "./mock/countries"
 
 describe("Countries component", () => {
   beforeEach(() => {
