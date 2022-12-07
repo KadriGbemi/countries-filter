@@ -20,7 +20,7 @@ function App() {
     setInputValue(value)
 
     if (value) {
-      refetch({ code: value })
+      refetch({ code: value.toUpperCase() })
     }
   }, 1000)
 
